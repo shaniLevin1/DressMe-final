@@ -64,7 +64,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                             for(DataSnapshot user: snapshot.child("Clients").getChildren()){ //move over all clients
                                 String id = Objects.requireNonNull(user.child("details").getValue(Client.class)).getUserId();
                                 if(id.equals(fireBaseAuth.getUid())){
-                                    startActivity(new Intent(loginActivity.this, MainActivity.class));
+//                                    startActivity(new Intent(loginActivity.this, MainActivity.class));
                                 }
                             }
                             //check if the user is supplier

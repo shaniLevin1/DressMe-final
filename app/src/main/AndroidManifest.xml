@@ -9,75 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.dressMe">
-<!--        <meta-data-->
-<!--            android:name="com.google.android.actions"-->
-<!--            android:resource="@xml/ic_close_white_24dp" />-->
 
-        <activity
-            android:name="Activities.update_detalis_supplier"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name="Activities.test"-->
-<!--            android:exported="false" />-->
-        <activity
-            android:name="Activities.UpdateDetailsClient"
-            android:exported="false" />
         <activity
             android:name="Activities.SupplierRegister"
             android:exported="false" />
-        <activity
-            android:name="Activities.SearchResults"
-            android:exported="false" />
-        <activity
-            android:name="Activities.SearchHistory"
-            android:exported="false" />
-        <activity
-            android:name="Activities.ProductDetailsClient"
-            android:exported="false" />
-        <activity
-            android:name="Activities.ProductDetails"
-            android:exported="false" />
-        <activity
-            android:name="Activities.AddDress"
-            android:exported="false" />
-        <activity
-            android:name="Activities.PrivateZone"
-            android:exported="false" />
+
         <activity
             android:name="Activities.MainSupplier"
             android:exported="false" />
-        <activity
-            android:name="Activities.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name="Activities.GmachStockSupplier"
-            android:exported="false" />
-        <activity
-            android:name="Activities.GmachStockClient"
-            android:exported="false" />
-        <activity
-            android:name="Activities.GmachDetails"
-            android:exported="false" />
-        <activity
-            android:name="Activities.GmachCustomers"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name="Activities.Dialog"-->
-<!--            android:exported="false" />-->
+
+
         <activity
             android:name="Activities.ClientRegister"
             android:exported="false" />
-        <activity
-            android:name="Activities.Chat"
-            android:exported="false" />
-        <activity
-            android:name="Activities.AddDressActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name="Activities.DressesListActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_supplier_main"-->
-<!--            android:theme="@style/Theme.dressMe.NoActionBar" />-->
 
         <activity
             android:name="Activities.loginActivity"

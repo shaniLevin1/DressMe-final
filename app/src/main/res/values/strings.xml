@@ -31,4 +31,5 @@
     <string name="sign_up">sign_up</string>
     <string name="register">Register</string>
     <string name="register_client">Register Client</string>
+    <string name="title_activity_supplier_dresses">supplierDresses</string>
 </resources>

@@ -64,7 +64,7 @@ public class ClientRegister extends AppCompatActivity {
                                     if(task.isSuccessful()) {
                                         createNewClientUser(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                                         Toast.makeText(ClientRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(ClientRegister.this,MainActivity.class));
+//                                        startActivity(new Intent(ClientRegister.this,MainActivity.class));
                                     }
                                     else{
                                         Toast.makeText(ClientRegister.this, "Registration failed", Toast.LENGTH_SHORT).show();
