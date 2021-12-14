@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="colorArray">
+
+        <item>choose dress color</item>
+
+        <item>black</item>
+
+        <item>blue</item>
+
+        <item>red</item>
+
+        <item>yellow</item>
+
+        <item>green</item>
+
+        <item>Other</item>
+
+    </array>
+</resources>

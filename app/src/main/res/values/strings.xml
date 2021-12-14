@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">dressMe</string>
+    <string name="title_activity_product_details">ProductDetails</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_product_details_client">ProductDetailsClient</string>
+    <string name="title_activity_after_reserve">after_reserve</string>
+    <string name="title_activity_upload_image">UploadImage</string>
+    <string name="title_activity_resreve_products_client">ResreveProductsClient</string>
+    <string name="title_activity_update_details_client">UpdateDetailsClient</string>
+    <string name="title_activity_to_delete">toDelete</string>
+    <string name="add_dresss">add_dresss</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register_as_client">Register as client</string>
+    <string name="register_as_supplier">Register as supplier</string>
+    <string name="login">Login</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="choose_the_category_of_your_gmach">Choose the category of your gmach</string>
+    <string name="choose_the_location_in_the_country">Choose the location in the country</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="sign_up">sign_up</string>
+    <string name="register">Register</string>
+    <string name="register_client">Register Client</string>
+</resources>

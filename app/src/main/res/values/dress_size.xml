@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <array name="sizesArray">
+
+        <item>choose dress size</item>
+
+        <item>small</item>
+
+        <item>medium</item>
+
+        <item>large</item>
+
+        <item>Other</item>
+
+    </array>
+
+</resources>

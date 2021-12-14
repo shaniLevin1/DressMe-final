@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <array name="categoriesArray">
+
+        <item>choose dress category</item>
+
+        <item>maxi dresses</item>
+
+        <item>midi dresses</item>
+
+        <item>mini dresses</item>
+
+        <item>Other</item>
+
+    </array>
+
+</resources>

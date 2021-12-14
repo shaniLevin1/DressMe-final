@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="locationsArray">
+
+        <item>choose location</item>
+
+        <item>North</item>
+
+        <item>Center</item>
+
+        <item>South</item>
+
+        <item>Jerusalem</item>
+
+    </array>
+</resources>
