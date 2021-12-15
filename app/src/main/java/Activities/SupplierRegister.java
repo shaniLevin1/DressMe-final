@@ -63,7 +63,7 @@ public class SupplierRegister extends AppCompatActivity implements View.OnClickL
                         Supplier user = new Supplier(name, email, phone, userId);
                         myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").setValue(user);
                         Toast.makeText(SupplierRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SupplierRegister.this, MainSupplier.class));
+                        startActivity(new Intent(SupplierRegister.this, SupplierRegister.class));
                         finish();
                     } else {
                         Toast.makeText(SupplierRegister.this, "Registration failed", Toast.LENGTH_SHORT).show();

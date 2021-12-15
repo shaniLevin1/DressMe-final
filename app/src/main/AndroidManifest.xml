@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.dressMe">
-
+        <activity
+            android:name="Activities.AddDress"
+            android:exported="false" />
         <activity
             android:name="Activities.SupplierRegister"
             android:exported="false" />
-
+        <activity
+            android:name="Activities.SupplierDresses"
+            android:exported="false" />
         <activity
             android:name="Activities.MainSupplier"
             android:exported="false" />
-
-
         <activity
             android:name="Activities.ClientRegister"
             android:exported="false" />
-
         <activity
             android:name="Activities.loginActivity"
             android:exported="true">

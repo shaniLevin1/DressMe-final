@@ -1,16 +1,93 @@
 package Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import com.example.dressme.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import Adapters.Supplier;
 
 
-public class MainSupplier extends AppCompatActivity {
+public class MainSupplier extends AppCompatActivity  implements View.OnClickListener{
+    private TextView displayName;
+    private Button supp_profile, dresses_list;
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference supplier_ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_supplier);
+        setViews();
+    }
+    private void setViews(){
+        //set button
+        supp_profile =(Button) findViewById(R.id.supp_profile);
+        dresses_list =(Button) findViewById(R.id.dresses_list);
+
+        supp_profile.setOnClickListener((View.OnClickListener) this);
+        dresses_list.setOnClickListener((View.OnClickListener) this);
+        //set text
+        displayName = (TextView) findViewById(R.id.hello);
+        //set firebase
+        firebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        supplier_ref = mFirebaseDatabase.getReference().child("Suppliers").child(firebaseAuth.getUid()).child("details");
+        supplier_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String name =snapshot.getValue(Supplier.class).getName();
+                displayName.setText("Hey "+name+"! what do you want to do?");
+            }
+            @Override public void onCancelled(@NonNull DatabaseError error) { }
+        });//end listener
+    };
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.supp_profile){
+            startActivity(new Intent(MainSupplier.this, MainSupplier.class));
+        }
+        if(v.getId() == R.id.dresses_list){
+            startActivity(new Intent(MainSupplier.this, SupplierDresses.class));
+        }
+    }
+
+    //*****menu bar*****
+
+    private void Logout(){
+        firebaseAuth.signOut();
+        finish();
+        startActivity(new Intent(MainSupplier.this,loginActivity.class));
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.main_logoutMenu){
+            Logout();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
