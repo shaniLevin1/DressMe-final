@@ -12,19 +12,19 @@
 
     <item
         android:id="@+id/Home"
-        android:title="Home"
+        android:title="MainActivity"
         app:showAsAction="never">
     </item>
 
     <item
-        android:id="@+id/personal_profile"
+        android:id="@+id/MyProfile"
         android:title="My profile"
         app:showAsAction="never">
     </item>
 
 
     <item
-        android:id="@+id/main_logoutMenu"
+        android:id="@+id/Logout"
         android:title="Logout"
         app:showAsAction="never">
         <!--        android:orderInCategory="100"-->

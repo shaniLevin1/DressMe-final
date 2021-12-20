@@ -29,7 +29,7 @@ import Adapters.Supplier;
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
     Button login,clientRegist,supplierRegist;
     private EditText userEmail,userPassword;
-    DatabaseReference db_ref;
+    DatabaseReference user_ref;
     FirebaseAuth fireBaseAuth;
 
     @Override
@@ -48,7 +48,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         supplierRegist.setOnClickListener(this);
         //firebase
         fireBaseAuth= FirebaseAuth.getInstance();
-        db_ref = FirebaseDatabase.getInstance().getReference();
+        user_ref = FirebaseDatabase.getInstance().getReference();
 
     }
     private void validate(String username , String userPassword) {
@@ -57,14 +57,14 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
-                    db_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             //check if the user is client
                             for(DataSnapshot user: snapshot.child("Clients").getChildren()){ //move over all clients
                                 String id = Objects.requireNonNull(user.child("details").getValue(Client.class)).getUserId();
                                 if(id.equals(fireBaseAuth.getUid())){
-//                                    startActivity(new Intent(loginActivity.this, MainActivity.class));
+                                    startActivity(new Intent(loginActivity.this, MainClient.class));
                                 }
                             }
                             //check if the user is supplier

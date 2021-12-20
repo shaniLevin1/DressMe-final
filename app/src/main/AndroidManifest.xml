@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.dressMe">
         <activity
+            android:name="Activities.ClientProfile"
+            android:exported="false" />
+        <activity
+            android:name="Activities.MainClient"
+            android:exported="false" />
+        <activity
+            android:name="Activities.SupplierInfo"
+            android:exported="false" />
+        <activity
+            android:name="Activities.DressDetailsClient"
+            android:exported="false" />
+        <activity
             android:name="Activities.AddDress"
             android:exported="false" />
         <activity
@@ -23,6 +35,12 @@
             android:exported="false" />
         <activity
             android:name="Activities.ClientRegister"
+            android:exported="false" />
+        <activity
+            android:name="Activities.SearchDress"
+            android:exported="false" />
+        <activity
+            android:name="Activities.DressSearchResult"
             android:exported="false" />
         <activity
             android:name="Activities.loginActivity"

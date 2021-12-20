@@ -3,7 +3,6 @@ package Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dressme.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +21,7 @@ import Adapters.Client;
 
 public class ClientRegister extends AppCompatActivity {
     private  EditText clientName, clientPassword, clientEmail, clientPhone; //the details the new client fill
-    private Button register,  HaveAccount;
+    private Button register;
     String name, email, password, phone;
     DatabaseReference myRef;
     FirebaseAuth fireBaseAuth;
@@ -36,18 +35,9 @@ public class ClientRegister extends AppCompatActivity {
         clientPassword = (EditText) findViewById(R.id.password);
         clientEmail = (EditText) findViewById(R.id.email);
         register =(Button) findViewById(R.id.submit);
-        HaveAccount=(Button) findViewById(R.id.LoginRegist);
         clientPhone = (EditText) findViewById(R.id.Phone);
         fireBaseAuth= FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
-
-        HaveAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ClientRegister.this, loginActivity.class);
-                startActivity(intent);
-            }
-        });
 
         register.setOnClickListener(new View.OnClickListener() {
 
@@ -62,9 +52,15 @@ public class ClientRegister extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()) {
-                                        createNewClientUser(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
+                                        String client_id=task.getResult().getUser().getUid();
+                                        name = clientName.getText().toString();
+                                        email= clientEmail.getText().toString().trim();
+                                        password= clientPassword.getText().toString().trim();
+                                        phone = clientPhone.getText().toString();
+                                        Client user = new Client(name, email, phone,client_id);
+                                        myRef.child("Clients").child(client_id).child("details").setValue(user);
                                         Toast.makeText(ClientRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
-//                                        startActivity(new Intent(ClientRegister.this,MainActivity.class));
+                                        startActivity(new Intent(ClientRegister.this, MainClient.class));
                                     }
                                     else{
                                         Toast.makeText(ClientRegister.this, "Registration failed", Toast.LENGTH_SHORT).show();
@@ -76,15 +72,6 @@ public class ClientRegister extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void createNewClientUser(String userId) { //the userId the id of the new client user
-        name = clientName.getText().toString();
-        email= clientEmail.getText().toString().trim();
-        password= clientPassword.getText().toString().trim();
-        phone = clientPhone.getText().toString();
-        Client user = new Client(name, email, phone,userId);
-        myRef.child("Clients").child(userId).child("details").setValue(user);
     }
 
     private boolean validate(){

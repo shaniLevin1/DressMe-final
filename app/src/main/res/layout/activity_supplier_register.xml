@@ -15,7 +15,7 @@
         android:layout_height="77dp"
         android:gravity="center"
         android:text="Register Client"
-
+        android:fontFamily="@font/architects_daughter"
         android:textColor="@color/cardview_dark_background"
         android:textSize="55sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.094" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/clientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -37,10 +37,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SignUp"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.123" />
 
     <EditText
         android:id="@+id/supplierName"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/clientName"
         app:layout_constraintVertical_bias="0.0"  />
 
     <TextView
@@ -164,25 +164,11 @@
         app:backgroundTint="?android:attr/textColorSecondaryInverse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.87" />
 
-    <Button
-        android:id="@+id/LoginRegist"
-        android:layout_width="248dp"
-        android:layout_height="45dp"
-        android:text="Have an Account? Sign In"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="12sp"
-        app:backgroundTint="?android:attr/textColorSecondaryInverse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

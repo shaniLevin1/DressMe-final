@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_all"
     tools:context="Activities.SupplierDresses">
 
     <ScrollView
@@ -43,7 +44,7 @@
                 android:orientation="vertical">
 
                 <ListView
-                    android:id="@+id/dressesList"
+                    android:id="@+id/dressList"
                     android:layout_width="match_parent"
                     android:layout_height="605dp"
                     android:paddingLeft="100px">

@@ -44,7 +44,7 @@ public class SupplierDresses extends AppCompatActivity implements View.OnClickLi
 
     private void setUIViews(){
 
-        listView = (ListView) findViewById(R.id.dressesList);
+        listView = (ListView) findViewById(R.id.dressList);
         //set button
         addDress = (Button) findViewById(R.id.addDress);
         addDress.setOnClickListener((View.OnClickListener) this);
@@ -60,24 +60,25 @@ public class SupplierDresses extends AppCompatActivity implements View.OnClickLi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String clickedItem = (String) listView.getItemAtPosition(position); //name of product
-                Intent i = new Intent(SupplierDresses.this, SupplierDresses.class);//////////
+                String clickedItem = (String) listView.getItemAtPosition(position);
+                Intent i = new Intent(SupplierDresses.this, SupplierDresses.class);
                 i.putExtra("key", clickedItem);
                 startActivity(i);
             }
         });
-    }//end set adapter
+    }
     private void showDresses() {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (!snapshot.hasChild("Dresses")) {
+                if (!snapshot.hasChild("Dresses")) {  //if the supplier dont have any dresses yet
                     dressItemName.add("You don't have dresses yet");
                     arrayAdapter.notifyDataSetChanged();
-                } else {
+                }
+                else {
                     for (DataSnapshot dress: snapshot.child("Dresses").getChildren()) {
-                        Dress p = dress.getValue(Dress.class);
-                        dressItemName.add(p.getName());
+                        Dress d = dress.getValue(Dress.class);
+                        dressItemName.add(d.getName());
                         arrayAdapter.notifyDataSetChanged();
                     }
                 }
@@ -93,27 +94,11 @@ public class SupplierDresses extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.addDress){
-            //go to Product
             startActivity(new Intent(SupplierDresses.this, AddDress.class));
         }
     }
 
-    //*****menu bar*****
-    private void Logout(){
-        firebaseAuth.signOut();
-        finish();
-        startActivity(new Intent(SupplierDresses.this,loginActivity.class));
-    }
-
-    public void openMain(){
-        Intent intent = new Intent(this, MainSupplier.class);
-        startActivity(intent);
-    }
-
-    public void openPrivateZone(){
-        Intent intent = new Intent(this, SupplierDresses.class);//////
-        startActivity(intent);
-    }
+    //menu
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,16 +108,19 @@ public class SupplierDresses extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.main_logoutMenu){
-            Logout();
+        if(item.getItemId() == R.id.Logout){
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this,loginActivity.class));
         }
-        if(item.getItemId() == R.id.personal_profile){
-            openPrivateZone();
+        if(item.getItemId() == R.id.MyProfile){
+            Intent intent = new Intent(this, ClientProfile.class);
+            startActivity(intent);
         }
         if(item.getItemId() == R.id.Home){
-            openMain();
+            Intent intent = new Intent(this, MainSupplier.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

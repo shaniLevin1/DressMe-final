@@ -15,62 +15,67 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+
+import Adapters.Dress;
 import Adapters.Supplier;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class SupplierRegister extends AppCompatActivity implements View.OnClickListener{
-    private  EditText userName, userPassword, userEmail,userPhone;
+public class SupplierRegister extends AppCompatActivity{
+    private  EditText supplierName, supplierPassword, supplierEmail, supplierPhone;
     private Button register;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference myRef;
     private String name, email, password, phone;
+    private ArrayList<Dress> dress_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_register);
         //text
-        userName= (EditText) findViewById(R.id.supplierName);
-        userEmail= (EditText) findViewById(R.id.EmailInput);
-        userPassword= (EditText) findViewById(R.id.PasswordInput);
-        userPhone= (EditText) findViewById(R.id.PhoneNumberInput);
+        supplierName = (EditText) findViewById(R.id.supplierName);
+        supplierEmail = (EditText) findViewById(R.id.EmailInput);
+        supplierPassword = (EditText) findViewById(R.id.PasswordInput);
+        supplierPhone = (EditText) findViewById(R.id.PhoneNumberInput);
         //buttons
-        register=(Button) findViewById(R.id.registerSupplier);
+        register = (Button) findViewById(R.id.registerSupplier);
         register.setOnClickListener((View.OnClickListener) this);
         //firebase
-        firebaseAuth= FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
-    }
+        register.setOnClickListener(new View.OnClickListener() {
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.registerSupplier) {
-            registerFunc();
-        }
-    }
-
-    private void registerFunc(){
-        name = userName.getText().toString();
-        phone = userPhone.getText().toString();
-        email=userEmail.getText().toString().trim();
-        password=userPassword.getText().toString().trim();
-        if(validate()) {
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
-                        Supplier user = new Supplier(name, email, phone, userId);
-                        myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").setValue(user);
-                        Toast.makeText(SupplierRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SupplierRegister.this, SupplierRegister.class));
-                        finish();
-                    } else {
-                        Toast.makeText(SupplierRegister.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    }
+            @Override
+            public void onClick(View v) {
+                if (validate()) {
+                    name = supplierName.getText().toString();
+                    phone = supplierPhone.getText().toString();
+                    email = supplierEmail.getText().toString().trim();
+                    password = supplierPassword.getText().toString().trim();
+                    dress_list = new ArrayList<>();
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            System.out.println("1111111111111111111111111");
+                            if (task.isSuccessful()) {
+                                String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                                Supplier user = new Supplier(name, email, phone, userId, dress_list);
+                                myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").setValue(user);
+//                        myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").child("dress_list");
+                                Toast.makeText(SupplierRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SupplierRegister.this, MainSupplier.class));
+                                finish();
+                            } else {
+                                Toast.makeText(SupplierRegister.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
     }
 
     private boolean validate (){
@@ -79,17 +84,14 @@ public class SupplierRegister extends AppCompatActivity implements View.OnClickL
         if(name.isEmpty()){
             Toast.makeText(this,"please enter your name",Toast.LENGTH_SHORT).show();
         }
-        else if(email.isEmpty()){
+        if(email.isEmpty()){
             Toast.makeText(this,"please enter your email",Toast.LENGTH_SHORT).show();
         }
-        else if(password.isEmpty()){
+        if(password.isEmpty()){
             Toast.makeText(this,"please enter your password",Toast.LENGTH_SHORT).show();
         }
-        else if(phone.isEmpty()){
+        if(phone.isEmpty()){
             Toast.makeText(this,"please enter your phone",Toast.LENGTH_SHORT).show();
-        }
-        else if(password.length() < 6){
-            Toast.makeText(this, "Password length must be at least 6 characters", Toast.LENGTH_SHORT).show();
         }
         else{
             validate=true;

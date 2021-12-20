@@ -19,54 +19,57 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import Adapters.Supplier;
+import Adapters.Client;
 
-
-public class MainSupplier extends AppCompatActivity  implements View.OnClickListener{
-    private TextView displayName;
-    private Button supp_profile, dresses_list;
+public class MainClient extends AppCompatActivity {
+    private TextView title;
+    private Button clientProfile, serachDress;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference supplier_ref;
+    private DatabaseReference client_ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_supplier);
+        setContentView(R.layout.activity_main_client);
         setViews();
     }
-    private void setViews(){
-        //set button
-        supp_profile =(Button) findViewById(R.id.supplierProfile);
-        dresses_list =(Button) findViewById(R.id.dressList);
 
-        supp_profile.setOnClickListener((View.OnClickListener) this);
-        dresses_list.setOnClickListener((View.OnClickListener) this);
+    private void setViews() {
+        //set button
+        clientProfile = (Button) findViewById(R.id.supplierProfile);
+        serachDress = (Button) findViewById(R.id.dressList);
+
+        clientProfile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainClient.this,ClientProfile.class));
+            }
+        });
+        serachDress.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainClient.this, SearchDress.class));
+            }
+        });
+
         //set text
-        displayName = (TextView) findViewById(R.id.hello);
+        title = (TextView) findViewById(R.id.hello);
         //set firebase
         firebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        supplier_ref = mFirebaseDatabase.getReference().child("Suppliers").child(firebaseAuth.getUid()).child("details");
-        supplier_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        client_ref = mFirebaseDatabase.getReference().child("Clients").child(firebaseAuth.getUid()).child("details");
+        client_ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String name =snapshot.getValue(Supplier.class).getName();
-                displayName.setText("Hey "+name+"! what do you want to do?");
+                String name = snapshot.getValue(Client.class).getName();
+                title.setText("Hey " + name + "! what do you want to do?");
             }
-            @Override public void onCancelled(@NonNull DatabaseError error) { }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     };
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.supplierProfile){
-            startActivity(new Intent(MainSupplier.this, MainSupplier.class));
-        }
-        if(v.getId() == R.id.dressList){
-            startActivity(new Intent(MainSupplier.this, SupplierDresses.class));
-        }
-    }
 
     //menu
 
@@ -88,9 +91,9 @@ public class MainSupplier extends AppCompatActivity  implements View.OnClickList
             startActivity(intent);
         }
         if(item.getItemId() == R.id.Home){
-            Intent intent = new Intent(this, MainSupplier.class);
+            Intent intent = new Intent(this, MainClient.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-}
+    }

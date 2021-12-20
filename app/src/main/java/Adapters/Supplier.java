@@ -1,25 +1,34 @@
 package Adapters;
 
-import android.net.Uri;
+import java.util.ArrayList;
 
 public class Supplier {
     private String name, email, phone, id;
+    private ArrayList<Dress> list_dress;
 
     public Supplier(){}
 
-    public Supplier(String name, String email,String id){
+    public Supplier(String name, String email,String address,String id){
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.id = id;
 
     }
-    public Supplier(String name,String email, String phone,String id){
+
+    public Supplier(String name,String email, String phone,String address,String id){
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.id = id;
 
+    }
+    public Supplier(String name,String email, String phone,String id,ArrayList<Dress> list_dress){
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.id = id;
+        this.list_dress=list_dress;
     }
 
     public String getName() {
@@ -40,6 +49,12 @@ public class Supplier {
     }
     public String getId() {
         return id;
+    }
+    public ArrayList<Dress> getDressList() {
+        return list_dress;
+    }
+    public void setDressList(ArrayList<Dress> list_dress) {
+        this.list_dress=list_dress;
     }
 
 }

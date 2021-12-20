@@ -1,14 +1,17 @@
 package Adapters;
 
-import android.net.Uri;
+import java.io.Serializable;
 
-public class Dress {
-    private String name, description, burrowTime, available, category, color, size, location;
+
+public class Dress  implements Serializable {
+    private String name, description, burrowTime, available, category, color, size, location, supp_id;
+    private static final long serialVersionUID = 1234L;
+
 
     public Dress(){}
 
     public Dress(String name, String description, String burrowTime,String available, String category,
-                 String color, String size, String location){
+                 String color, String size, String location,String supp_id){
         this.name = name;
         this.description = description;
         this.burrowTime = burrowTime;
@@ -17,6 +20,7 @@ public class Dress {
         this.color = color;
         this.size = size;
         this.location = location;
+        this.supp_id=supp_id;
     }
     //set & get
     public String getName () { return this.name;}
@@ -32,9 +36,9 @@ public class Dress {
     public String getColor1() {return this.color;}
     public void setColor1(String color) {this.color = color;}
     public String getSize() {return this.size;}
-    public void setSize(String size) {this.category = size;}
+    public void setSize(String size) {this.size = size;}
     public String getLocation() {return this.location;}
     public void setLocation(String location) {this.location = location;}
-
+    public String getSupp_id() {return this.supp_id;}
 }
 
