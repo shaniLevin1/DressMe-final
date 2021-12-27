@@ -42,7 +42,6 @@ public class SupplierRegister extends AppCompatActivity{
         supplierPhone = (EditText) findViewById(R.id.PhoneNumberInput);
         //buttons
         register = (Button) findViewById(R.id.registerSupplier);
-        register.setOnClickListener((View.OnClickListener) this);
         //firebase
         firebaseAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
@@ -61,9 +60,9 @@ public class SupplierRegister extends AppCompatActivity{
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             System.out.println("1111111111111111111111111");
                             if (task.isSuccessful()) {
-                                String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                                String userId =task.getResult().getUser().getUid();
                                 Supplier user = new Supplier(name, email, phone, userId, dress_list);
-                                myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").setValue(user);
+                                myRef.child("Suppliers").child(firebaseAuth.getUid()).child("details").setValue(user);
 //                        myRef.child("Suppliers").child(Objects.requireNonNull(firebaseAuth.getUid())).child("details").child("dress_list");
                                 Toast.makeText(SupplierRegister.this, "Registration successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SupplierRegister.this, MainSupplier.class));
@@ -80,17 +79,21 @@ public class SupplierRegister extends AppCompatActivity{
 
     private boolean validate (){
         Boolean validate=false;
+        name = supplierName.getText().toString();
+        phone = supplierPhone.getText().toString();
+        email = supplierEmail.getText().toString().trim();
+        password = supplierPassword.getText().toString().trim();
 
         if(name.isEmpty()){
             Toast.makeText(this,"please enter your name",Toast.LENGTH_SHORT).show();
         }
-        if(email.isEmpty()){
+        else if(email.isEmpty()){
             Toast.makeText(this,"please enter your email",Toast.LENGTH_SHORT).show();
         }
-        if(password.isEmpty()){
+        else if(password.isEmpty()){
             Toast.makeText(this,"please enter your password",Toast.LENGTH_SHORT).show();
         }
-        if(phone.isEmpty()){
+        else if(phone.isEmpty()){
             Toast.makeText(this,"please enter your phone",Toast.LENGTH_SHORT).show();
         }
         else{

@@ -101,7 +101,7 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
                 public void onDataChange(DataSnapshot snapshot) { //snapshot is the current supplier
                     if (snapshot.exists()) {
                         DataSnapshot dress_list_obj = snapshot.child("details").child("dress list");
-                        ArrayList<Dress> dress_list1;
+                        ArrayList<Dress> dress_list1=new ArrayList<>();
                         if (!dress_list_obj.exists()) {
                             dress_list1 = new ArrayList<>();
                         }

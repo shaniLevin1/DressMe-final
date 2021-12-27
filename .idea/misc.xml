@@ -3,76 +3,44 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/drawable/ic_close_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_add_dress.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_profile.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_register.xml" value="0.15715579710144928" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_details_client.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_details_supplier.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_search_result.xml" value="0.1160081053698075" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_serch_result.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_login.xml" value="0.15715579710144928" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_client.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_client1.xml" value="0.19375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_supplier.xml" value="0.15715579710144928" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_supplier2.xml" value="0.1921875" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/fragment_first.xml" value="0.15715579710144928" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/fragment_second.xml" value="0.15715579710144928" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_report_client.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_search_dress.xml" value="0.22282608695652173" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_dresses.xml" value="0.176" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_info.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_register.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1859375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/drawable/ic_close_white_24dp.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/drawable/ic_launcher_background.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/font/alfa_slab_one.xml" value="0.284375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/font/architects_daughter.xml" value="0.284375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_add_dress.xml" value="0.1890625" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_after_reserve.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_chat.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_client_register.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_dialog.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_dresses_list.xml" value="0.37937384898710863" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_gmach_customers.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_gmach_details.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_gmach_stock_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_gmach_stock_supplier.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_login2.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_login22.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_main.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_main_supplier.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_private_zone.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_product.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_product_details.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_product_details_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_search_history.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_search_results.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_supplier_main.xml" value="2.4" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_supplier_register.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_test.xml" value="0.15364583333333334" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_update_details_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_update_detalis_supplier.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_welcome.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_after_reserve.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_after_reserve2.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_product_details.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_product_details_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_resreve_products_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_update_details_client.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/content_upload_image.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first2.xml" value="0.21829710144927536" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first3.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first4.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first5.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_first6.xml" value="0.7417763157894737" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second2.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second3.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second4.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second5.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second6.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/fragment_second7.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/list_2_items.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/layout/supplier_main.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe22/app/src/main/res/layout/activity_update_detalis_supplier.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.16979166666666667" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_add_dress.xml" value="0.33" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_register.xml" value="0.28442028985507245" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_login.xml" value="0.21145833333333333" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_supplier.xml" value="0.28442028985507245" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_dresses.xml" value="0.25" />
-        <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe-final/app/src/main/res/menu/main_menu.xml" value="0.321875" />
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_welcome.xml" value="0.20520833333333333" />

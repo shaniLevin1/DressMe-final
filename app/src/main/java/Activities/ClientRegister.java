@@ -94,9 +94,6 @@ public class ClientRegister extends AppCompatActivity {
         else if(phone.isEmpty()){
             Toast.makeText(this,"please enter your phone",Toast.LENGTH_SHORT).show();
         }
-        else if(password.length() < 6){
-            Toast.makeText(this, "Password length must be at least 6 characters", Toast.LENGTH_SHORT).show();
-        }
         else{
             validate=true;
         }

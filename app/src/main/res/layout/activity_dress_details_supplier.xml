@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_all"
-    tools:context="Activities.DressDetailsClient">
+    tools:context="Activities.DressDetailsSupplier">
 
     <TextView
         android:id="@+id/dress_name_text"
@@ -195,15 +195,16 @@
         android:id="@+id/burrow_days_text"
         android:layout_width="256dp"
         android:layout_height="37dp"
+        android:layout_marginBottom="156dp"
         android:gravity="center"
         android:text="Burrow days:"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768"
+        app:layout_constraintTop_toBottomOf="@+id/pcunits"
+        app:layout_constraintVertical_bias="0.069"
         tools:ignore="UnknownId" />
 
     <TextView
@@ -222,33 +223,18 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/burrow_dress"
-        android:layout_width="139dp"
-        android:layout_height="53dp"
-        android:text="Reserve"
+        android:id="@+id/dress_return"
+        android:layout_width="145dp"
+        android:layout_height="84dp"
+        android:text="return dress"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp"
         app:backgroundTint="?android:attr/textColorSecondaryInverse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933" />
-
-    <Button
-        android:id="@+id/supplier_info"
-        android:layout_width="147dp"
-        android:layout_height="51dp"
-        android:text="Supplier Info"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="14sp"
-        app:backgroundTint="?android:attr/textColorSecondaryInverse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.158" />
-
+        app:layout_constraintVertical_bias="0.957" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

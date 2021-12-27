@@ -8,7 +8,7 @@ public class Supplier {
 
     public Supplier(){}
 
-    public Supplier(String name, String email,String address,String id){
+    public Supplier(String name, String email,String phone,String id){
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -16,13 +16,6 @@ public class Supplier {
 
     }
 
-    public Supplier(String name,String email, String phone,String address,String id){
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.id = id;
-
-    }
     public Supplier(String name,String email, String phone,String id,ArrayList<Dress> list_dress){
         this.name = name;
         this.email = email;

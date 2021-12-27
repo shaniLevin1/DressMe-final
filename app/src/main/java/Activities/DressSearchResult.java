@@ -47,6 +47,7 @@ public class DressSearchResult extends AppCompatActivity {
         dresses_list = new ArrayList<>();
         search_result_list = new ArrayList<>();
         dresses_list = (ArrayList<Dress>) bundle.get("list");
+        supplier_ref=FirebaseDatabase.getInstance().getReference().child("Suppliers").child(FirebaseAuth.getInstance().getUid()).child("Dresses");
 
         setAdapter();
         showDresses();
@@ -59,7 +60,7 @@ public class DressSearchResult extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(DressSearchResult.this, DressDetailsClient.class);
-                i.putExtra("dress",dresses_list.get(position));
+                i.putExtra("dress",dresses_list.get(position)); //send dress object to the next activity(DressDetailsClient)
                 startActivity(i);
             }
         });

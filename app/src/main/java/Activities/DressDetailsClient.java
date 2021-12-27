@@ -1,6 +1,11 @@
 package Activities;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.dressme.R;
@@ -12,27 +17,47 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import Adapters.Client;
 import Adapters.Dress;
+import Adapters.OrderDress;
+import Adapters.Supplier;
 
 public class DressDetailsClient extends AppCompatActivity implements View.OnClickListener{
     private TextView dress_name, dress_description,dress_color,dress_size,dress_location, dress_burrow_days, dress_available;
     private Button burrow,supp_info;
+    private String client_email,supplier_email;
     private ImageView img;
-    private DatabaseReference suppRef, mainRef;
+    private DatabaseReference suppRef, mainRef,orderRef;
     private FirebaseAuth firebaseAuth;
     private String suppId;
     private Dress dress;
+    private LocalDate current_date;
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +70,7 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
         dress_size= (TextView) findViewById(R.id.size_dress);
         dress_location= (TextView) findViewById(R.id.location_dress);
         dress_burrow_days = (TextView) findViewById(R.id.burrow_days_dress);
+        current_date=java.time.LocalDate.now();
 
 
         //set img
@@ -73,13 +99,9 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    System.out.println("5555555555555555555555555555555");
                     dress = snapshot.getValue(Dress.class);
                     dress_name.setText(dress.getName());
-                    System.out.println("33333333333333333333333333");
-                    System.out.println("dress_name: " + " " + dress_name);
                     dress_description.setText(dress.getDescription());
-                    System.out.println("dress_Description: " + " " + dress_description);
 
                     dress_burrow_days.setText(dress.getBurrowTime());
                     dress_available.setText(dress.getAvailable());
@@ -91,11 +113,85 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
             @Override public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
-
-    private void burrowDress(){ //didnt implement yet
-
+    private void getNotification(String SupplierId){
+//        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,"A new order has been received");
+//        builder.setContentTitle("My Title");
+//        builder.setContentText("Hello");
+//        builder.setAutoCancel(true);
+//        NotificationManagerCompat managerCompat= NotificationManagerCompat.from(this);
+//        managerCompat.notify(Integer.parseInt(SupplierId),builder.build());
+//
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+//            NotificationChannel channel=new NotificationChannel("My","my",NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager =getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void burrowDress() { //didnt implement yet
+        if (dress.getAvailable().equals("yes")) {
+            Dress update_dress = dress;
+            update_dress.setAvailable("no");
+            suppRef.setValue(update_dress);
+            suppRef = FirebaseDatabase.getInstance().getReference("Suppliers").child(suppId);
+            orderRef = suppRef;
+            suppRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @SuppressLint("LongLogTag")
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        ArrayList<Dress> update_list = new ArrayList<>();
+//                        for (DataSnapshot dress3 : snapshot.child("details").child("dress list").getChildren()) {
+//                            if (!dress3.getValue(Dress.class).getName().equals(update_dress.getName())) {
+//                                update_list.add(dress3.getValue(Dress.class));
+//                            }
+//                        }
+//                        suppRef.child("details").child("dress list").setValue(update_list);
+                        String client_id=FirebaseAuth.getInstance().getUid();
+                        String supplier_id=suppId;
+                        String burrow_date=current_date.toString();
+                        String return_date=(current_date.plusDays(Integer.parseInt(dress.getBurrowTime()))).toString();
+                        OrderDress order_dress=new OrderDress(supplier_id,client_id,burrow_date,return_date,update_dress.getName());
+
+                        orderRef.child("orders").push().setValue(order_dress);
+                        mainRef.child("Clients").child(client_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Client client=snapshot.getValue(Client.class);
+                                client_email=client.getEmail();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        mainRef.child("Suppliers").child(supplier_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Supplier supplier=snapshot.getValue(Supplier.class);
+                                supplier_email=supplier.getEmail();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        getNotification(supplier_id);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+            startActivity(new Intent(DressDetailsClient.this, acceptReserve.class));
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.burrow_dress) { //didnt implement yet

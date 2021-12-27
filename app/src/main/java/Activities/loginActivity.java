@@ -20,9 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import Adapters.Client;
+import Adapters.Director;
 import Adapters.Supplier;
 
 
@@ -31,6 +33,8 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private EditText userEmail,userPassword;
     DatabaseReference user_ref;
     FirebaseAuth fireBaseAuth;
+    Director director;
+//    ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,21 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         //firebase
         fireBaseAuth= FirebaseAuth.getInstance();
         user_ref = FirebaseDatabase.getInstance().getReference();
+        user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.hasChild("Director")) {
+                    System.out.println("11111111111111111");
+                    director=new Director();
+                    user_ref.child("Director");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
     private void validate(String username , String userPassword) {

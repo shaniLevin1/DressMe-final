@@ -91,9 +91,10 @@ public class SearchDress extends AppCompatActivity implements View.OnClickListen
                     //for on the dresses
                     list_dresses=new ArrayList<>();
                     for (DataSnapshot sup : snapshot.getChildren()) {
-                        for (DataSnapshot dress : sup.child("details").child("dress list").getChildren()) {
-                            int counter = 0;
+                        for (DataSnapshot dress : sup.child("Dresses").getChildren()) {
                             Dress dress1 = dress.getValue(Dress.class);
+                            if (dress1.getAvailable().equals("yes")) {
+                                int counter = 0;
                                 if (dress1.getCategory().equals(category) || category.equals("choose dress category")) {
                                     counter++;
                                 }
@@ -106,8 +107,9 @@ public class SearchDress extends AppCompatActivity implements View.OnClickListen
                                 if (dress1.getSize().equals(size) || size.equals("choose dress size")) {
                                     counter++;
                                 }
-                            if (counter == 4) {
-                                list_dresses.add(dress1);
+                                if (counter == 4) {
+                                    list_dresses.add(dress1);
+                                }
                             }
                         }
                     }

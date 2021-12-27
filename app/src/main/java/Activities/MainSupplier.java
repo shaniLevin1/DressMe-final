@@ -24,7 +24,7 @@ import Adapters.Supplier;
 
 public class MainSupplier extends AppCompatActivity  implements View.OnClickListener{
     private TextView displayName;
-    private Button supp_profile, dresses_list;
+    private Button supp_profile, dresses_list, report_client;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference supplier_ref;
@@ -39,6 +39,7 @@ public class MainSupplier extends AppCompatActivity  implements View.OnClickList
         //set button
         supp_profile =(Button) findViewById(R.id.supplierProfile);
         dresses_list =(Button) findViewById(R.id.dressList);
+        report_client = (Button) findViewById(R.id.report_client);
 
         supp_profile.setOnClickListener((View.OnClickListener) this);
         dresses_list.setOnClickListener((View.OnClickListener) this);
@@ -65,6 +66,9 @@ public class MainSupplier extends AppCompatActivity  implements View.OnClickList
         }
         if(v.getId() == R.id.dressList){
             startActivity(new Intent(MainSupplier.this, SupplierDresses.class));
+        }
+        if(v.getId() == R.id.report_client){
+            startActivity(new Intent(MainSupplier.this, ReportClient.class));
         }
     }
 
