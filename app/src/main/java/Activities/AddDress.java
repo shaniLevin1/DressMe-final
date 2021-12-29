@@ -1,47 +1,72 @@
 package Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import Adapters.Dress;
 import Adapters.Supplier;
 
 import com.example.dressme.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class AddDress extends AppCompatActivity implements View.OnClickListener{
+public class AddDress extends AppCompatActivity implements View.OnClickListener {
     private EditText dress_name, dress_description, dress_borrowTime;
+    private ImageView img;
     private String name, description, burrowTime, available, category, color, size, location,supplier_id;
-    private Button add;
+    private Button add, upload, camera;
     private Spinner dressCategory, dressColor, dressSize, dressLocation;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference supplier_ref,dress_ref;
     private Supplier dress_list_obj;
     private ArrayList<Dress> dress_list;
+    private StorageTask uploadTask;
+    private StorageReference storageRef;
+    private static final int GET_FROM_GALLERY = 3;
+    private static final int GET_FROM_CAMERA = 0;
+    byte[] byteData;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dress);
+      //  setUIViews();
+
         //set edit text
         dress_name = (EditText) findViewById(R.id.DressName);
         dress_description = (EditText) findViewById(R.id.DressDescription);
@@ -49,7 +74,14 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
 
         //set button
         add = (Button) findViewById(R.id.AddTheDress);
+        upload = (Button) findViewById(R.id.productUpImg);
+        camera = (Button) findViewById(R.id.productCamera);
         add.setOnClickListener((View.OnClickListener) this);
+        upload.setOnClickListener((View.OnClickListener) this);
+        camera.setOnClickListener((View.OnClickListener) this);
+
+        //set img
+        img = (ImageView) findViewById(R.id.ProductImage);
 
         //set spinner
         dressCategory = (Spinner) findViewById(R.id.category_spinner);
@@ -67,17 +99,63 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
         dressLocation = (Spinner) findViewById(R.id.location_spinner);
         ArrayAdapter<String> locationsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.locationsArray));
         dressLocation.setAdapter(locationsAdapter);
+
         //set firebase
         firebaseAuth= FirebaseAuth.getInstance();
         supplier_ref = FirebaseDatabase.getInstance().getReference().child("Suppliers").child(firebaseAuth.getUid());
+        storageRef = FirebaseStorage.getInstance().getReference("Images");
     }
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.productUpImg){
+            if (uploadTask != null && uploadTask.isInProgress()) makeToast("upload in progress");
+            else uploadImage();
+        }
+        if(v.getId() == R.id.productCamera){
+            if (uploadTask != null && uploadTask.isInProgress()) makeToast("upload in progress");
+            else takePicture();
+        }
         if(v.getId() == R.id.AddTheDress){
             addDress();
         }
     }
+
+    private void uploadImage() {
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(i, GET_FROM_GALLERY);
+    }
+    private void takePicture(){
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(i, GET_FROM_GALLERY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if (requestCode == GET_FROM_CAMERA) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                img.setImageBitmap(bitmap);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byteData = stream.toByteArray();
+            }
+            if(requestCode == GET_FROM_GALLERY){
+                Uri imguri = data.getData();
+                img.setImageURI(imguri);
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imguri);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byteData = baos.toByteArray();
+                }
+                catch (FileNotFoundException e) { e.printStackTrace();}
+                catch (IOException e) { e.printStackTrace();}
+            }
+        }
+    }// end on act result
 
     private void addDress(){
         //set string
@@ -96,6 +174,12 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
             Dress dress = new Dress(name, description, burrowTime, available, category, color, size, location, supplier_id);
             DatabaseReference dress_ref = supplier_ref.child("Dresses").child(name);
             dress_ref.setValue(dress);
+            // add img to DB
+            if(byteData != null){
+                String path = firebaseAuth.getUid() + "/" + name;
+                uploadTask = storageRef.child(path).putBytes(byteData);
+            }
+
             supplier_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) { //snapshot is the current supplier
@@ -123,8 +207,6 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
             finish();
         }
     }
-
-
 
     private boolean validate(){ //have to fill all the details of the new dress
         Boolean validate=false;
@@ -156,8 +238,11 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener{
         return validate;
     }
 
-    //menu
+    private void makeToast(String m){
+        Toast.makeText(AddDress.this, m, Toast.LENGTH_SHORT).show();
+    }
 
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);

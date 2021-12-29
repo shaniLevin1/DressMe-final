@@ -1,16 +1,24 @@
 package Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.example.dressme.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -43,9 +51,9 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
     private ImageView img;
     private DatabaseReference suppRef, mainRef,orderRef,dressRef;
     private FirebaseAuth firebaseAuth;
+    private StorageReference storageRef;
     private String suppId;
     private Dress dress;
-
 
 
     @Override
@@ -64,6 +72,8 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
 
         //set img
         img = (ImageView) findViewById(R.id.dress_image);
+
+
         //set button
         returnDress = (Button) findViewById(R.id.dress_return);
         returnDress.setOnClickListener((View.OnClickListener) this);
@@ -85,6 +95,25 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
                 dress_color.setText(new_dress.getColor1());
                 dress_location.setText(new_dress.getLocation());
                 dress_size.setText((new_dress.getSize()));
+                getImg();
+            }
+
+            private void getImg(){
+
+                String newPath = suppId + "/" + dress_name.getText();
+                storageRef = FirebaseStorage.getInstance().getReference("Images");
+
+                final long ONE_MEGABYTE = (long) Math.pow(1024, 10);
+                storageRef.child(newPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        img.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) { }
+                });
             }
 
             @Override
@@ -151,12 +180,26 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.dress_return) {
-            returnFunc();
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(DressDetailsSupplier.this);
+        builder.setMessage("did you return the deposit to the client?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (v.getId() == R.id.dress_return) {
+                            returnFunc();
+                        }
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
-    //menu
 
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);

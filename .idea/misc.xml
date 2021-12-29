@@ -44,6 +44,12 @@
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/maaya/AndroidStudioProjects/DressMe/app/src/main/res/layout/activity_welcome.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_add_dress.xml" value="0.165625" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_profile.xml" value="0.165625" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_details_client.xml" value="0.16394927536231885" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_dress_details_supplier.xml" value="0.16394927536231885" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/ronih/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_register.xml" value="0.22" />
       </map>
     </option>
   </component>
