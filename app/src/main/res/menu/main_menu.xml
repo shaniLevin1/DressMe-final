@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/Home"
-        android:title="MainActivity"
+        android:title="Home"
         app:showAsAction="never">
     </item>
 
