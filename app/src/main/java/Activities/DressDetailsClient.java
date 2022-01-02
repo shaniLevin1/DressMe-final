@@ -4,17 +4,23 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.example.dressme.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -45,7 +51,7 @@ import Adapters.OrderDress;
 import Adapters.Supplier;
 
 public class DressDetailsClient extends AppCompatActivity implements View.OnClickListener{
-    private TextView dress_name, dress_description,dress_color,dress_size,dress_location, dress_burrow_days, dress_available;
+    private TextView dress_name, dress_description,dress_color,dress_size,dress_location, dress_burrow_days,dress_securityDeposit, dress_available;
     private Button burrow,supp_info;
     private String client_email,supplier_email;
     private ImageView img;
@@ -70,6 +76,7 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
         dress_size= (TextView) findViewById(R.id.size_dress);
         dress_location= (TextView) findViewById(R.id.location_dress);
         dress_burrow_days = (TextView) findViewById(R.id.burrow_days_dress);
+        dress_securityDeposit = (TextView) findViewById(R.id.security_deposit_dress);
         current_date=java.time.LocalDate.now();
 
 
@@ -102,30 +109,36 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
                     dress = snapshot.getValue(Dress.class);
                     dress_name.setText(dress.getName());
                     dress_description.setText(dress.getDescription());
-
                     dress_burrow_days.setText(dress.getBurrowTime());
                     dress_available.setText(dress.getAvailable());
                     dress_color.setText(dress.getColor1());
                     dress_location.setText(dress.getLocation());
+                    dress_securityDeposit.setText(dress.getSecurity_deposit());
                     dress_size.setText((dress.getSize()));
+                    getImg();
                 }
             }
+
+            private void getImg(){
+
+                String newPath = suppId + "/" + dress_name.getText();
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference("Images");
+
+                final long ONE_MEGABYTE = (long) Math.pow(1024, 10);
+                storageRef.child(newPath).getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        img.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) { }
+                });
+            }
+
             @Override public void onCancelled(@NonNull DatabaseError error) { }
         });
-    }
-    private void getNotification(String SupplierId){
-//        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,"A new order has been received");
-//        builder.setContentTitle("My Title");
-//        builder.setContentText("Hello");
-//        builder.setAutoCancel(true);
-//        NotificationManagerCompat managerCompat= NotificationManagerCompat.from(this);
-//        managerCompat.notify(Integer.parseInt(SupplierId),builder.build());
-//
-//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-//            NotificationChannel channel=new NotificationChannel("My","my",NotificationManager.IMPORTANCE_DEFAULT);
-//            NotificationManager manager =getSystemService(NotificationManager.class);
-//            manager.createNotificationChannel(channel);
-//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -179,7 +192,6 @@ public class DressDetailsClient extends AppCompatActivity implements View.OnClic
 
                             }
                         });
-                        getNotification(supplier_id);
                     }
                 }
 

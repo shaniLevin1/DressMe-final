@@ -19,9 +19,6 @@
             android:name="Activities.ReserveDressClient"
             android:exported="false" />
         <activity
-            android:name="Activities.ReportClient"
-            android:exported="false" />
-        <activity
             android:name="Activities.ClientProfile"
             android:exported="false" />
         <activity

@@ -67,9 +67,6 @@ public class MainSupplier extends AppCompatActivity  implements View.OnClickList
         if(v.getId() == R.id.dressList){
             startActivity(new Intent(MainSupplier.this, SupplierDresses.class));
         }
-        if(v.getId() == R.id.report_client){
-            startActivity(new Intent(MainSupplier.this, ReportClient.class));
-        }
     }
 
     //menu

@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/drawable/ic_close_white_24dp.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_accept_reserve.xml" value="0.22418478260869565" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_add_dress.xml" value="0.21422101449275363" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_profile.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_client_register.xml" value="0.15715579710144928" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_supplier.xml" value="0.15715579710144928" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_main_supplier2.xml" value="0.1921875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_report_client.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_reserve_dress_client.xml" value="0.2109375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_search_dress.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_dresses.xml" value="0.176" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DressMe-final/app/src/main/res/layout/activity_supplier_info.xml" value="0.19114583333333332" />

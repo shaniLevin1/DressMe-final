@@ -47,6 +47,8 @@ import Adapters.Supplier;
 public class DressDetailsSupplier extends AppCompatActivity implements View.OnClickListener{
     private TextView dress_name, dress_description,dress_color,dress_size,dress_location, dress_burrow_days, dress_available;
     String name;
+    String available;
+    String orderId;
     private Button returnDress;
     private ImageView img;
     private DatabaseReference suppRef, mainRef,orderRef,dressRef;
@@ -68,12 +70,8 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
         dress_size= (TextView) findViewById(R.id.size_dress);
         dress_location= (TextView) findViewById(R.id.location_dress);
         dress_burrow_days = (TextView) findViewById(R.id.burrow_days_dress);
-
-
         //set img
         img = (ImageView) findViewById(R.id.dress_image);
-
-
         //set button
         returnDress = (Button) findViewById(R.id.dress_return);
         returnDress.setOnClickListener((View.OnClickListener) this);
@@ -89,7 +87,6 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
                 suppRef = FirebaseDatabase.getInstance().getReference("Suppliers").child(suppId).child("Dresses").child(new_dress.getName());
                 dress_name.setText(new_dress.getName());
                 dress_description.setText(new_dress.getDescription());
-
                 dress_burrow_days.setText(new_dress.getBurrowTime());
                 dress_available.setText(new_dress.getAvailable());
                 dress_color.setText(new_dress.getColor1());
@@ -99,7 +96,6 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
             }
 
             private void getImg(){
-
                 String newPath = suppId + "/" + dress_name.getText();
                 storageRef = FirebaseStorage.getInstance().getReference("Images");
 
@@ -134,41 +130,25 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
         orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap:snapshot.getChildren()){
-                    System.out.println("222222222222222 "+snap.getValue());
-                    HashMap<String, String> od= (HashMap<String, String>) snap.getValue();
-                    System.out.println("333333333333333333" + od.get("dressName"));
-                    name=od.get("dressName");
-                    String returnDate=od.get("returnDate");
-                    if(name.equals(dress_name.getText().toString())){
-                        LocalDate localDate = LocalDate.parse(returnDate);
-                        long num_days=Duration.between(current_date.atStartOfDay(), localDate.atStartOfDay()).toDays();
-                        if(num_days<0){
-                            Toast.makeText(DressDetailsSupplier.this, "The dress was returned 5 days after " +
-                                    Integer.parseInt(String.valueOf(num_days)) + " the requested return date, you need to pay " +
-                                    (Integer.parseInt(String.valueOf(num_days))*20) , Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(DressDetailsSupplier.this, "The dress was returned on time!", Toast.LENGTH_SHORT).show();
-                        }
-                        dressRef=mainRef.child("Suppliers").child(FirebaseAuth.getInstance().getUid()).child("Dresses").child(name);
-                        dressRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Dress dress=snapshot.getValue(Dress.class);
-                                Dress new_dress=dress;
-                                new_dress.setAvailable("yes");
-                                dressRef.setValue(new_dress);
+                for(DataSnapshot snap:snapshot.getChildren()) {
+                    HashMap<String, String> od = (HashMap<String, String>) snap.getValue();
+                    name = od.get("dressName");
+                    orderId = orderRef.push().getKey();
+                    dressRef = mainRef.child("Suppliers").child(FirebaseAuth.getInstance().getUid()).child("Dresses").child(name);
+                        String returnDate = od.get("returnDate");
+                        if (name.equals(dress_name.getText().toString())) {
+                            LocalDate localDate = LocalDate.parse(returnDate);
+                            long num_days = Duration.between(current_date.atStartOfDay(), localDate.atStartOfDay()).toDays();
+                            if (num_days < 0) {
+                                Toast.makeText(DressDetailsSupplier.this, "The dress was returned " +
+                                        Integer.parseInt(String.valueOf(num_days)) + " days after the requested return date", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(DressDetailsSupplier.this, "The dress was returned on time!", Toast.LENGTH_SHORT).show();
                             }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                            snap.getRef().removeValue(); //remove the order from firebase
+                        }
                     }
                 }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

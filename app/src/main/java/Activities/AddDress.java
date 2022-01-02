@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,7 +12,6 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,8 +23,6 @@ import Adapters.Dress;
 import Adapters.Supplier;
 
 import com.example.dressme.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,18 +32,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AddDress extends AppCompatActivity implements View.OnClickListener {
-    private EditText dress_name, dress_description, dress_borrowTime;
+    private EditText dress_name, dress_description, dress_borrowTime,dress_securityDeposit;
     private ImageView img;
-    private String name, description, burrowTime, available, category, color, size, location,supplier_id;
+    private String name, description, burrowTime, available, category, color, size, location,securityDeposit,supplier_id;
     private Button add, upload, camera;
     private Spinner dressCategory, dressColor, dressSize, dressLocation;
     private FirebaseAuth firebaseAuth;
@@ -71,17 +65,18 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
         dress_name = (EditText) findViewById(R.id.DressName);
         dress_description = (EditText) findViewById(R.id.DressDescription);
         dress_borrowTime = (EditText) findViewById(R.id.DressDaysBurrow);
+        dress_securityDeposit = (EditText) findViewById(R.id.DressSsecurityDeposit);
 
         //set button
         add = (Button) findViewById(R.id.AddTheDress);
-        upload = (Button) findViewById(R.id.productUpImg);
-        camera = (Button) findViewById(R.id.productCamera);
+        upload = (Button) findViewById(R.id.DressUpImage);
+        camera = (Button) findViewById(R.id.camera);
         add.setOnClickListener((View.OnClickListener) this);
         upload.setOnClickListener((View.OnClickListener) this);
         camera.setOnClickListener((View.OnClickListener) this);
 
         //set img
-        img = (ImageView) findViewById(R.id.ProductImage);
+        img = (ImageView) findViewById(R.id.DressImage);
 
         //set spinner
         dressCategory = (Spinner) findViewById(R.id.category_spinner);
@@ -108,11 +103,11 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.productUpImg){
+        if(v.getId() == R.id.DressUpImage){
             if (uploadTask != null && uploadTask.isInProgress()) makeToast("upload in progress");
             else uploadImage();
         }
-        if(v.getId() == R.id.productCamera){
+        if(v.getId() == R.id.camera){
             if (uploadTask != null && uploadTask.isInProgress()) makeToast("upload in progress");
             else takePicture();
         }
@@ -155,7 +150,7 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
                 catch (IOException e) { e.printStackTrace();}
             }
         }
-    }// end on act result
+    }
 
     private void addDress(){
         //set string
@@ -167,11 +162,12 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
         color = dressColor.getSelectedItem().toString();
         size = dressSize.getSelectedItem().toString(); //small medium large
         location = dressLocation.getSelectedItem().toString();
+        securityDeposit = dress_securityDeposit.getText().toString();
         supplier_id = firebaseAuth.getUid();
 
         if(validate()) { //if the supplier fill all the details about the dress
             // add dress to firebase
-            Dress dress = new Dress(name, description, burrowTime, available, category, color, size, location, supplier_id);
+            Dress dress = new Dress(name, description, burrowTime, available, category, color, size, location,securityDeposit, supplier_id);
             DatabaseReference dress_ref = supplier_ref.child("Dresses").child(name);
             dress_ref.setValue(dress);
             // add img to DB
@@ -231,6 +227,9 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
         }
         else if(location.isEmpty()){
             Toast.makeText(this, "please enter dress location", Toast.LENGTH_SHORT).show();
+        }
+        else if(img.getDrawable() == null){
+            Toast.makeText(this, "please add picture of your dress", Toast.LENGTH_SHORT).show();
         }
         else{
             validate=true;

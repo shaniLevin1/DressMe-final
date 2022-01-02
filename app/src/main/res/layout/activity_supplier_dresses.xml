@@ -45,7 +45,7 @@
 
                 <ListView
                     android:id="@+id/dressList"
-                    android:layout_width="match_parent"
+                    android:layout_width="422dp"
                     android:layout_height="605dp"
                     android:paddingLeft="100px">
 

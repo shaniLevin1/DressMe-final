@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 
 public class Dress  implements Serializable {
-    private String name, description, burrowTime, available, category, color, size, location, supp_id;
+    private String name, description, burrowTime, available, category, color, size, location, security_deposit, supp_id;
     private static final long serialVersionUID = 1234L;
 
 
     public Dress(){}
 
     public Dress(String name, String description, String burrowTime,String available, String category,
-                 String color, String size, String location,String supp_id){
+                 String color, String size, String location, String security_deposit, String supp_id){
         this.name = name;
         this.description = description;
         this.burrowTime = burrowTime;
@@ -20,6 +20,7 @@ public class Dress  implements Serializable {
         this.color = color;
         this.size = size;
         this.location = location;
+        this.security_deposit = security_deposit;
         this.supp_id=supp_id;
     }
     //set & get
@@ -39,6 +40,9 @@ public class Dress  implements Serializable {
     public void setSize(String size) {this.size = size;}
     public String getLocation() {return this.location;}
     public void setLocation(String location) {this.location = location;}
+    public String getSecurity_deposit(){
+        return this.security_deposit;
+    }
+    public void setSecurity_deposit(String security_deposit) {this.security_deposit = security_deposit;}
     public String getSupp_id() {return this.supp_id;}
 }
-
