@@ -167,6 +167,19 @@ public class DressDetailsSupplier extends AppCompatActivity implements View.OnCl
                     public void onClick(DialogInterface dialog, int id) {
                         if (v.getId() == R.id.dress_return) {
                             returnFunc();
+                            suppRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Dress dress=snapshot.getValue(Dress.class);
+                                    dress.setAvailable("yes");
+                                    suppRef.setValue(dress);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                     }
                 })

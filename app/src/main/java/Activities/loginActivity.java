@@ -27,7 +27,7 @@ import Adapters.Supplier;
 
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
-    Button login,clientRegist,supplierRegist;
+    Button loginClient,loginSupplier, clientRegist,supplierRegist;
     private EditText userEmail,userPassword;
     DatabaseReference user_ref;
     FirebaseAuth fireBaseAuth;
@@ -41,8 +41,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         userPassword= (EditText) findViewById(R.id.password);
         userEmail= (EditText) findViewById(R.id.Email);
         //buttons
-        login=(Button)findViewById(R.id.login);
-        login.setOnClickListener(this);
+        loginClient=(Button)findViewById(R.id.loginClient);
+        loginClient.setOnClickListener(this);
+        loginSupplier=(Button)findViewById(R.id.loginSupplier);
+        loginSupplier.setOnClickListener(this);
         clientRegist=(Button)findViewById(R.id.clientRegist);
         clientRegist.setOnClickListener(this);
         supplierRegist=(Button)findViewById(R.id.supplierRegist);
@@ -52,7 +54,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         user_ref = FirebaseDatabase.getInstance().getReference();
 
     }
-    private void validate(String username , String userPassword) {
+    private void validateClient(String username , String userPassword) {
         fireBaseAuth.signInWithEmailAndPassword(username,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -68,6 +70,31 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                                     startActivity(new Intent(loginActivity.this, MainClient.class));
                                 }
                             }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                //if the user is not exist
+                else{
+                    Toast.makeText(loginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    task.getException();
+                }
+            }
+        });
+
+    }
+    private void validateSupplier(String username , String userPassword) {
+        fireBaseAuth.signInWithEmailAndPassword(username,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
+                    user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                             //check if the user is supplier
                             for(DataSnapshot user: snapshot.child("Suppliers").getChildren()){
                                 String id = Objects.requireNonNull(user.child("details").getValue(Supplier.class)).getId();
@@ -93,8 +120,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onClick(View v) {
-        if(v==login){
-            validate(userEmail.getText().toString(),userPassword.getText().toString());
+        if(v==loginClient){
+            validateClient(userEmail.getText().toString(),userPassword.getText().toString());
+        }
+        if(v==loginSupplier){
+            validateSupplier(userEmail.getText().toString(),userPassword.getText().toString());
         }
         if(v==clientRegist){
             startActivity(new Intent(this, ClientRegister.class));
