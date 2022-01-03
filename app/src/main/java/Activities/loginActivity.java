@@ -59,7 +59,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
                     user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,6 +66,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                             for(DataSnapshot user: snapshot.child("Clients").getChildren()){ //move over all clients
                                 String id = Objects.requireNonNull(user.child("details").getValue(Client.class)).getUserId();
                                 if(id.equals(fireBaseAuth.getUid())){
+                                    Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(loginActivity.this, MainClient.class));
                                 }
                             }
@@ -91,7 +91,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
                     user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,6 +98,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                             for(DataSnapshot user: snapshot.child("Suppliers").getChildren()){
                                 String id = Objects.requireNonNull(user.child("details").getValue(Supplier.class)).getId();
                                 if(id.equals(fireBaseAuth.getUid())){
+                                    Toast.makeText(loginActivity.this, "Sign successful", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(loginActivity.this, MainSupplier.class));
                                 }
                             }

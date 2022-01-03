@@ -216,16 +216,16 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
         else if(burrowTime.isEmpty()){
             Toast.makeText(this,"please enter dress burrow time",Toast.LENGTH_SHORT).show();
         }
-        else if(category.isEmpty()){
+        else if(category.isEmpty()||category.equals("choose dress category")){
             Toast.makeText(this,"please enter dress category",Toast.LENGTH_SHORT).show();
         }
-        else if(color.isEmpty()){
+        else if(color.isEmpty()||color.equals("choose dress color")){
             Toast.makeText(this, "please enter dress color", Toast.LENGTH_SHORT).show();
         }
-        else if(size.isEmpty()){
+        else if(size.isEmpty()||size.equals("choose dress size")){
             Toast.makeText(this, "please enter dress size", Toast.LENGTH_SHORT).show();
         }
-        else if(location.isEmpty()){
+        else if(location.isEmpty()||location.equals("choose location")){
             Toast.makeText(this, "please enter dress location", Toast.LENGTH_SHORT).show();
         }
         else if(img.getDrawable() == null){
