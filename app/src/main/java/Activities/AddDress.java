@@ -59,7 +59,6 @@ public class AddDress extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dress);
-      //  setUIViews();
 
         //set edit text
         dress_name = (EditText) findViewById(R.id.DressName);

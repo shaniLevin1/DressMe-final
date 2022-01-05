@@ -19,10 +19,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Gmach4U.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.Gmach4U.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="Theme.dressMe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.dressMe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

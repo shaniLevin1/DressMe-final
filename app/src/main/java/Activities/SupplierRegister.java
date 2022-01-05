@@ -50,11 +50,6 @@ public class SupplierRegister extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if (validate()) {
-                    name = supplierName.getText().toString();
-                    phone = supplierPhone.getText().toString();
-                    email = supplierEmail.getText().toString().trim();
-                    password = supplierPassword.getText().toString().trim();
-                    dress_list = new ArrayList<>();
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
